@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medical Symptom Analyzer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="page-title">Medical Symptom Analyzer</h1>
+        <form id="symptomForm">
+            <div class="form-section">
+                <label for="age" class="form-label">Age:</label>
+                <input 
+                    type="number" 
+                    id="age" 
+                    class="input-field" 
+                    required 
+                    min="0" 
+                    max="120"
+                    placeholder="Enter your age"
+                >
+                <div id="ageError" class="error-message">Please enter a valid age between 0 and 120.</div>
+            </div>
+            
+            <div class="form-section">
+                <label for="gender" class="form-label">Gender:</label>
+                <select id="gender" class="input-field" required>
+                    <option value="">Select Gender</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="other">Other</option>
+                </select>
+                <div id="genderError" class="error-message">Please select a gender.</div>
+            </div>
+            
+            <div class="form-section">
+                <label>Select Your Symptoms:</label>
+                <div id="symptomsSelection">
+                    <!-- General Symptoms -->
+                    <div class="symptom-category">
+                        <div class="category-title">General Symptoms</div>
+                        <div class="symptoms-container" id="generalSymptoms">
+                            <div class="symptom-button" data-symptom="Fever">Fever</div>
+                            <div class="symptom-button" data-symptom="Fatigue">Fatigue</div>
+                            <div class="symptom-button" data-symptom="Weakness">Weakness</div>
+                            <div class="symptom-button" data-symptom="Chills">Chills</div>
+                            <div class="symptom-button" data-symptom="Night Sweats">Night Sweats</div>
+                        </div>
+                    </div>
+
+                    <!-- Respiratory Symptoms -->
+                    <div class="symptom-category">
+                        <div class="category-title">Respiratory Symptoms</div>
+                        <div class="symptoms-container" id="respiratorySymptoms">
+                            <div class="symptom-button" data-symptom="Cough">Cough</div>
+                            <div class="symptom-button" data-symptom="Shortness of breath">Shortness of breath</div>
+                            <div class="symptom-button" data-symptom="Sore throat">Sore throat</div>
+                            <div class="symptom-button" data-symptom="Wheezing">Wheezing</div>
+                            <div class="symptom-button" data-symptom="Congestion">Congestion</div>
+                        </div>
+                    </div>
+
+                    <!-- Digestive Symptoms -->
+                    <div class="symptom-category">
+                        <div class="category-title">Digestive Symptoms</div>
+                        <div class="symptoms-container" id="digestiveSymptoms">
+                            <div class="symptom-button" data-symptom="Nausea">Nausea</div>
+                            <div class="symptom-button" data-symptom="Vomiting">Vomiting</div>
+                            <div class="symptom-button" data-symptom="Diarrhea">Diarrhea</div>
+                            <div class="symptom-button" data-symptom="Abdominal Pain">Abdominal Pain</div>
+                            <div class="symptom-button" data-symptom="Constipation">Constipation</div>
+                        </div>
+                    </div>
+
+                    <!-- Pain Symptoms -->
+                    <div class="symptom-category">
+                        <div class="category-title">Pain Symptoms</div>
+                        <div class="symptoms-container" id="painSymptoms">
+                            <div class="symptom-button" data-symptom="Headache">Headache</div>
+                            <div class="symptom-button" data-symptom="Body aches">Body aches</div>
+                            <div class="symptom-button" data-symptom="Chest pain">Chest pain</div>
+                            <div class="symptom-button" data-symptom="Joint Pain">Joint Pain</div>
+                            <div class="symptom-button" data-symptom="Muscle Cramps">Muscle Cramps</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-section">
+                <label>Medical History:</label>
+                <div class="symptoms-container" id="medicalHistoryButtons">
+                    <div class="medical-history-button" data-history="Diabetes">Diabetes</div>
+                    <div class="medical-history-button" data-history="Hypertension">Hypertension</div>
+                    <div class="medical-history-button" data-history="Heart Disease">Heart Disease</div>
+                    <div class="medical-history-button" data-history="Asthma">Asthma</div>
+                    <div class="medical-history-button" data-history="None">None</div>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <label for="additionalInfo">Additional Information (Optional):</label>
+                <textarea 
+                    id="additionalInfo" 
+                    class="input-field" 
+                    rows="4" 
+                    placeholder="Provide any additional details about your condition or symptoms..."
+                ></textarea>
+            </div>
+            
+            <button type="submit" class="analyze-button">Analyze Symptoms</button>
+        </form>
+        
+        <div id="loading">
+            Analyzing symptoms... Please wait.
+        </div>
+ 
+        <div id="results">
+            <h2>Analysis Results</h2>
+            <div id="resultContent"></div>
+        </div>
+
+        <div class="disclaimer">
+            <strong>Important Disclaimer:</strong> This is an AI-generated analysis and should not replace professional medical advice. 
+            Always consult with a qualified healthcare professional for accurate diagnosis and treatment. In case of emergency, 
+            seek immediate medical attention.
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

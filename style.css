@@ -1,0 +1,187 @@
+:root {
+    --primary-color: #2a9b7d;
+    --secondary-color: #5f6d7a;
+    --accent-color: #34d399;
+    --warning-color: #f43f5e;
+    --background-light: #f4f7f9;
+    --text-dark: #2c3e50;
+    --border-color: #e0e4e8;
+    --white: #ffffff;
+    --transition-speed: 0.3s;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(135deg, #009e6f 0%, #015b31 100%);
+    color: var(--text-dark);
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.container {
+    background-color: var(--white);
+    border-radius: 16px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 1200px;
+    padding: 40px;
+    position: relative;
+    overflow: hidden;
+}
+
+.container::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at center, rgba(74, 144, 226, 0.1) 0%, transparent 70%);
+    z-index: 1;
+    pointer-events: none;
+}
+
+.page-title {
+    text-align: center;
+    color: var(--primary-color);
+    margin-bottom: 30px;
+    font-weight: 700;
+    letter-spacing: -1px;
+    position: relative;
+    z-index: 2;
+}
+
+.form-section, .form-group {
+    margin-bottom: 25px;
+    position: relative;
+    z-index: 2;
+}
+
+.form-label, label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: 600;
+    color: var(--secondary-color);
+}
+
+.input-field, input, select, textarea {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 16px;
+    transition: all var(--transition-speed);
+    font-family: 'Inter', sans-serif;
+}
+
+.input-field:focus, input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.2);
+}
+
+.input-field.error, input.error, select.error {
+    border-color: var(--warning-color);
+}
+
+.error-message {
+    color: var(--warning-color);
+    font-size: 0.8em;
+    margin-top: 5px;
+    display: none;
+}
+
+.symptoms-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 12px;
+}
+
+.symptom-category {
+    margin-bottom: 20px;
+}
+
+.category-title {
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: var(--secondary-color);
+}
+
+.symptom-button, .medical-history-button {
+    background-color: var(--background-light);
+    border: 2px solid var(--border-color);
+    border-radius: 100px;
+    padding: 12px 15px;
+    text-align: center;
+    cursor: pointer;
+    transition: all var(--transition-speed);
+    font-weight: 500;
+    position: relative;
+    overflow: hidden;
+}
+
+.symptom-button:hover, .medical-history-button:hover {
+    transform: scale(1.05);
+}
+
+.symptom-button.selected, .medical-history-button.selected {
+    background-color: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+    box-shadow: 0 4px 15px rgba(74, 144, 226, 0.3);
+}
+
+.analyze-button, .analyze {
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    padding: 15px 20px;
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    width: 100%;
+    transition: all var(--transition-speed);
+    box-shadow: 0 6px 15px rgba(52, 211, 153, 0.3);
+}
+
+.analyze-button:hover, .analyze:hover {
+    background-color: #2dd4bf;
+    transform: translateY(-3px);
+}
+
+#loading {
+    display: none;
+    text-align: center;
+    color: var(--primary-color);
+    padding: 20px;
+}
+
+#results {
+    display: none;
+    margin-top: 20px;
+    background-color: var(--background-light);
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.disclaimer {
+    margin-top: 20px;
+    background-color: #fff3cd;
+    border: 3px solid #ffeeba;
+    color: #856404;
+    padding: 15px;
+    border-radius: 8px;
+    font-size: 0.9em;
+}
+
