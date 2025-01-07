@@ -4,7 +4,6 @@ document.getElementById('fetchNews').addEventListener('click', async () => {
   const category = document.getElementById('category').value;
   const newsContainer = document.getElementById('newsContainer');
   newsContainer.innerHTML = '<p>Loading...</p>';
-
   try {
     const newsResponse = await fetch(`https://newsapi.org/v2/top-headlines?category=${category}&apiKey=35cb930e7ab24c849dbf119c9424ce5f`);
     const newsData = await newsResponse.json();
@@ -31,7 +30,6 @@ document.getElementById('fetchNews').addEventListener('click', async () => {
     newsContainer.innerHTML = '<p>Error fetching news.</p>';
   }
 });
-
 async function getSentiment(text) {
   try {
     const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`, {
