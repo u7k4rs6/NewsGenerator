@@ -1,27 +1,27 @@
-const API_KEY = "AIzaSyCPlObYrqLzHXLjZzYKqFNTDjKWk3S6jZE";
+const CORS_PROXY = 'https://cors-anywhere.herokuapp.com/';
+const NEWS_API_URL = 'https://newsapi.org/v2/top-headlines';
 
 document.getElementById('fetchNews').addEventListener('click', async () => {
   const category = document.getElementById('category').value;
   const newsContainer = document.getElementById('newsContainer');
   newsContainer.innerHTML = '<p>Loading...</p>';
-  try {
-    const newsResponse = await fetch(`https://newsapi.org/v2/top-headlines?category=${category}&apiKey=35cb930e7ab24c849dbf119c9424ce5f`);
-    const newsData = await newsResponse.json();
 
-    if (newsData.articles) {
+  try {
+    const response = await fetch(`${CORS_PROXY}${NEWS_API_URL}?category=${category}&apiKey=35cb930e7ab24c849dbf119c9424ce5f`);
+    const data = await response.json();
+
+    if (data.articles?.length > 0) {
       newsContainer.innerHTML = '';
 
-      for (const article of newsData.articles) {
-        const sentiment = await getSentiment(article.title);
+      data.articles.forEach((article) => {
         const articleHTML = `
           <div class="article">
             <h3>${article.title}</h3>
-            <p>${article.description || "No description available."}</p>
-            <p class="sentiment">Sentiment: ${sentiment}</p>
+            <p>${article.description || 'No description available.'}</p>
           </div>
         `;
         newsContainer.innerHTML += articleHTML;
-      }
+      });
     } else {
       newsContainer.innerHTML = '<p>No articles found.</p>';
     }
@@ -30,21 +30,3 @@ document.getElementById('fetchNews').addEventListener('click', async () => {
     newsContainer.innerHTML = '<p>Error fetching news.</p>';
   }
 });
-async function getSentiment(text) {
-  try {
-    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        contents: [{
-          parts: [{ text }]
-        }]
-      })
-    });
-    const data = await response.json();
-    return data?.contents?.[0]?.parts?.[0]?.text || "Neutral";
-  } catch (error) {
-    console.error('Error analyzing sentiment:', error);
-    return "Error";
-  }
-}
