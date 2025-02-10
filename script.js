@@ -7,14 +7,13 @@ document.getElementById('fetchNews').addEventListener('click', async () => {
   newsContainer.innerHTML = '<p>Loading...</p>';
 
   try {
-    const proxyUrl = 'https://api.allorigins.win/get?url=' + encodeURIComponent(`${NEWS_API_URL}?category=${category}&apiKey=${API_KEY}`);
+    const proxyUrl = `https://thingproxy.freeboard.io/fetch/${NEWS_API_URL}?category=${category}&apiKey=${API_KEY}`;
     const response = await fetch(proxyUrl);
     const data = await response.json();
-    const articles = JSON.parse(data.contents).articles;
 
-    if (articles?.length > 0) {
+    if (data.articles?.length > 0) {
       newsContainer.innerHTML = '';
-      articles.forEach((article) => {
+      data.articles.forEach((article) => {
         const articleHTML = `
           <div class="article">
             <h3>${article.title}</h3>
