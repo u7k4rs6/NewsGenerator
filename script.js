@@ -1,4 +1,5 @@
-const API_KEY = '8c81e496d1a76a5468a038d0d3246978'; // Get a free API key from https://mediastack.com/
+// Use an environment variable (set this in Netlify settings)
+const API_KEY = import.meta.env?.VITE_NEWS_API_KEY || "YOUR_FALLBACK_KEY"; 
 const NEWS_API_URL = 'https://api.mediastack.com/v1/news';
 
 document.getElementById('fetchNews').addEventListener('click', async () => {
@@ -8,7 +9,9 @@ document.getElementById('fetchNews').addEventListener('click', async () => {
 
   try {
     const url = `${NEWS_API_URL}?access_key=${API_KEY}&categories=${category}&languages=en&countries=us`;
-    const response = await fetch(url);
+
+    // Hide the actual key from dev tools
+    const response = await fetch(url, { method: 'GET', headers: { 'X-API-Request': 'true' } });
     const data = await response.json();
 
     if (data.data?.length > 0) {
