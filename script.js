@@ -1,6 +1,5 @@
-const API_KEY = '935ed9fcdac24f7f9fc3cb2cdfa374ed'; // Replace with your actual NewsAPI key
-const NEWS_API_URL = 'https://newsapi.org/v2/top-headlines';
-const PROXY_URL = 'https://corsproxy.io/?';
+const API_KEY = '8c81e496d1a76a5468a038d0d3246978'; // Get a free API key from https://mediastack.com/
+const NEWS_API_URL = 'https://api.mediastack.com/v1/news';
 
 document.getElementById('fetchNews').addEventListener('click', async () => {
   const category = document.getElementById('category').value;
@@ -8,17 +7,18 @@ document.getElementById('fetchNews').addEventListener('click', async () => {
   newsContainer.innerHTML = '<p>Loading...</p>';
 
   try {
-    const url = `${PROXY_URL}${encodeURIComponent(`${NEWS_API_URL}?category=${category}&apiKey=${API_KEY}`)}`;
+    const url = `${NEWS_API_URL}?access_key=${API_KEY}&categories=${category}&languages=en&countries=us`;
     const response = await fetch(url);
     const data = await response.json();
 
-    if (data.articles?.length > 0) {
+    if (data.data?.length > 0) {
       newsContainer.innerHTML = '';
-      data.articles.forEach((article) => {
+      data.data.forEach((article) => {
         const articleHTML = `
           <div class="article">
             <h3>${article.title}</h3>
             <p>${article.description || 'No description available.'}</p>
+            <a href="${article.url}" target="_blank">Read More</a>
           </div>
         `;
         newsContainer.innerHTML += articleHTML;
