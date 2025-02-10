@@ -1,17 +1,20 @@
+const API_KEY = '935ed9fcdac24f7f9fc3cb2cdfa374ed'; // Replace with your actual NewsAPI key
+const NEWS_API_URL = 'https://newsapi.org/v2/top-headlines';
+const PROXY_URL = 'https://corsproxy.io/?';
+
 document.getElementById('fetchNews').addEventListener('click', async () => {
   const category = document.getElementById('category').value;
   const newsContainer = document.getElementById('newsContainer');
   newsContainer.innerHTML = '<p>Loading...</p>';
 
   try {
-    const rssUrl = `https://newsapi.org/rss/top?category=${category}`;
-    const jsonUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}`;
-    const response = await fetch(jsonUrl);
+    const url = `${PROXY_URL}${encodeURIComponent(`${NEWS_API_URL}?category=${category}&apiKey=${API_KEY}`)}`;
+    const response = await fetch(url);
     const data = await response.json();
 
-    if (data.items?.length > 0) {
+    if (data.articles?.length > 0) {
       newsContainer.innerHTML = '';
-      data.items.forEach((article) => {
+      data.articles.forEach((article) => {
         const articleHTML = `
           <div class="article">
             <h3>${article.title}</h3>
