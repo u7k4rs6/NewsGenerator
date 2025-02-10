@@ -1,5 +1,4 @@
-const CORS_PROXY = 'https://cors-anywhere.herokuapp.com/';
-const API_KEY = 'AIzaSyCPlObYrqLzHXLjZzYKqFNTDjKWk3S6jZE';
+const API_KEY = '935ed9fcdac24f7f9fc3cb2cdfa374ed';
 const NEWS_API_URL = 'https://newsapi.org/v2/top-headlines';
 
 document.getElementById('fetchNews').addEventListener('click', async () => {
@@ -8,12 +7,14 @@ document.getElementById('fetchNews').addEventListener('click', async () => {
   newsContainer.innerHTML = '<p>Loading...</p>';
 
   try {
-    const response = await fetch(`${CORS_PROXY}${NEWS_API_URL}?category=${category}&apiKey=${API_KEY}`);
+    const proxyUrl = 'https://api.allorigins.win/get?url=' + encodeURIComponent(`${NEWS_API_URL}?category=${category}&apiKey=${API_KEY}`);
+    const response = await fetch(proxyUrl);
     const data = await response.json();
+    const articles = JSON.parse(data.contents).articles;
 
-    if (data.articles?.length > 0) {
+    if (articles?.length > 0) {
       newsContainer.innerHTML = '';
-      data.articles.forEach((article) => {
+      articles.forEach((article) => {
         const articleHTML = `
           <div class="article">
             <h3>${article.title}</h3>
