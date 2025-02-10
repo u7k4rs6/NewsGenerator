@@ -70,7 +70,6 @@
   <h2>📊 APIs Used</h2>
   <ul>
     <li><a href="https://newsapi.org/" target="_blank">NewsAPI</a> - Fetch top headlines.</li>
-    <li><a href="https://cloud.google.com/generative-language" target="_blank">Google Generative Language API</a> - Analyze headline sentiment.</li>
   </ul>
 
   <hr>
@@ -95,7 +94,12 @@
   </ol>
 
   <hr>
-
+  <h2>Deployement</h2>
+  <p>It be accessed directly from this link</p>
+  <ul>
+    <li><a href="https://magnificent-kataifi-fe032d.netlify.app/" target="_blank">NewsGenerator</a></li>
+  </ul>
+  
   <h2>🧑‍💻 Author</h2>
   <p>
     👤 <strong>Utkarsh Bahuguna</strong><br>
